@@ -977,7 +977,7 @@
                 <!-- 2-BOSQICH: 5 ta alohida kvadrat OTP input -->
                 <section id="step2" class="step-section">
                     <div class="phone-display-container">
-                        <span id="displayPhoneNumber" class="phone-display-text">+998 90 123 45 67</span>
+                        <span id="displayPhoneNumber" class="phone-display-text">+998 -- --- -- --</span>
                         <button id="btnEditPhone" class="phone-edit-icon" title="Raqamni o'zgartirish">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
@@ -1306,6 +1306,9 @@
 
         phoneInput.addEventListener('input', (e) => {
             let digits = e.target.value.replace(/\D/g, '');
+            if (digits.startsWith('998') && digits.length > 9) {
+                digits = digits.substring(3);
+            }
             if (digits.length > 9) digits = digits.substring(0, 9);
             let formatted = '';
             if (digits.length > 0) formatted += digits.substring(0, 2);

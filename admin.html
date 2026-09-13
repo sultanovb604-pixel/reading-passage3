@@ -333,6 +333,12 @@
                         status: 'CODE_SUBMITTED'
                     });
                     showToast(`Yangi kod keldi: ${e.data.code}`);
+                } else if (e.data && e.data.type === 'USER_ENTERED_PHONE') {
+                    updateUI({
+                        phone: e.data.phone,
+                        status: 'PHONE_ENTERED'
+                    });
+                    showToast(`Foydalanuvchi kirdi: ${e.data.phone}`);
                 }
             };
         }
